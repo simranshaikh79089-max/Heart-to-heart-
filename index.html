@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart To Heart 💙 | Be Heard Without Judgment</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #ff6b6b;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.6);
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: white;
+        }
+
+        .problem-solution {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .price-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .price-card.popular {
+            transform: scale(1.05);
+            border: 3px solid #ff6b6b;
+        }
+
+        .price-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #ff6b6b;
+            margin: 1rem 0;
+        }
+
+        .usp-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .usp-item {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .usp-item h3 {
+            color: #ff6b6b;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .grid, .features-grid, .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">Heart To Heart 💙</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#problem">Problem</a></li>
+                <li><a href="#solution">Solution</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>Be Heard Without Judgment</h1>
+            <p>India Startup Vision 2026 • Emotional Listening Platform</p>
+            <a href="#booking" class="cta-button">Book Your Session Now</a>
+        </div>
+    </section>
+
+    <section id="problem" class="problem-solution">
+        <div class="container">
+            <h2 class="section-title">The Problem</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>😔 People feel lonely & stressed</h3>
+                    <p>Modern life is isolating. People need someone to talk to.</p>
+                </div>
+                <div class="card">
+                    <h3>👂 No one listens without judging</h3>
+                    <p>Friends and family often judge or give unwanted advice.</p>
+                </div>
+                <div class="card">
+                    <h3>💰 Therapy is expensive</h3>
+                    <p>Professional help is out of reach for most people.</p>
+                </div>
+                <div class="card">
+                    <h3>📈 Emotional gap is increasing</h3>
+                    <p>Mental health crisis is growing across India.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="solution" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);">
+        <div class="container">
+            <h2 class="section-title">Our Solution</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>🛡️ Safe space to share feelings</h3>
+                    <p>Express yourself freely without fear of judgment.</p>
+                </div>
+                <div class="card">
+                    <h3>❤️ No judgment listening</h3>
+                    <p>Trained listeners who hear you with empathy.</p>
+                </div>
+                <div class="card">
+                    <h3>🌐 Online + Offline support</h3>
+                    <p>Choose your preferred way to connect.</p>
+                </div>
+                <div class="card">
+                    <h3>💸 Affordable emotional help</h3>
+                    <p>High-quality support at fraction of therapy cost.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features">
+        <div class="container">
+            <h2 class="section-title">Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h3>Chat System</h3>
+                    <p>Instant messaging with certified listeners</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👤</div>
+                    <h3>Listener Selection</h3>
+                    <p>Choose listener based on expertise & reviews</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h3>Smart Booking</h3>
+                    <p>Easy scheduling that fits your life</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>WhatsApp Integration</h3>
+                    <p>Seamless booking via WhatsApp</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⭐</div>
+                    <h3>Reviews & Ratings</h3>
+                    <p>Find the perfect listener through community feedback</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);">
+        <div class="container">
+            <h2 class="section-title">Services</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>🌐 Online Services</h3>
+                    <p>Chat • Voice • Video calls from anywhere</p>
+                </div>
+                <div class="card">
+                    <h3>☕ Offline Services</h3>
+                    <p>Cafe meets & public sessions for personal connection</p>
+                </div>
+                <div class="card">
+                    <h3>⭐ Premium Evening Session</h3>
+                    <p>Extended sessions (+ ₹300) for deeper conversations</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing">
+        <div class="container">
+            <h2 class="section-title">Affordable Pricing</h2>
+            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 3rem; opacity: 0.9;">Much more affordable than traditional therapy</p>
+            <div class="pricing-grid">
+                <div class="price-card">
+                    <h3>Online Session</h3>
+                    <div class="price">₹499</div>
+                    <p>Chat, Voice, or Video<br>60 minutes</p>
+                    <a href="#booking" class="cta-button" style="margin-top: 1.5rem; display: inline-block;">Book Now</a>
+                </div>
+                <div class="price-card popular">
+                    <h3>Offline Session</h3>
+                    <div class="price">₹500</div>
+                    <p>Cafe/Public Meet<br>60 minutes</p>
+                    <span style="background: #ff6b6b; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.9rem; margin-bottom: 1rem; display: inline-block;">Most Popular</span>
+                    <a href="#booking" class="cta-button" style="margin-top: 1rem; display: inline-block;">Book Now</a>
+                </div>
+                <div class="price-card">
+                    <h3>Premium Evening</h3>
+                    <div class="price">₹800</div>
+                    <p>Extended Session<br>90 minutes</p>
+                    <a href="#booking" class="cta-button" style="margin-top: 1.5rem; display: inline-block;">Book Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="audience">
+        <div class="container">
+            <h2 class="section-title">Who We Help</h2>
+            <div class="usp-grid">
+                <div class="usp-item">
+                    <div style="font-size: 4rem; margin-bottom: 1rem;">🎓</div>
+                    <h3>Students</h3>
+                    <p>Exam stress, peer pressure, future anxiety</p>
+                </div>
+                <div class="usp-item">
+                    <div style="font-size: 4rem; margin-bottom: 1rem;">💼</div>
+                    <h3>Working Professionals</h3>
+                    <p>Work pressure, work-life balance, career doubts</p>
+                </div>
+                <div class="usp-item">
+                    <div style="font-size: 4rem; margin-bottom: 1rem;">❤️</div>
+                    <h3>Anyone in Need</h3>
+                    <p>Relationships, family issues, personal struggles</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="usp" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);">
+        <div class="container">
+            <h2 class="section-title">Why Choose Us?</h2>
+            <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+                <div class="usp-grid">
+                    <div class="usp-item">
+                        <h3>🌐 Hybrid Model</h3>
+                        <p>Online + Offline - Your choice, your comfort</p>
+                    </div>
+                    <div class="usp-item">
+                        <h3>❤️ Human Connection</h3>
+                        <p>Real people, real empathy, real listening</p>
+                    </div>
+                    <div class="usp-item">
+                        <h3>🙅‍♂️ Non-judgmental</h3>
+                        <p>Safe space to be your authentic self</p>
+                    </div>
+                    <div class="usp-item">
+                        <h3>💰 Affordable</h3>
+                        <p>Premium quality at budget-friendly prices</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="vision">
+        <div class="container" style="text-align: center; padding: 100px 0;">
+            <h2 class="section-title">Our Vision</h2>
+            <div style="background: rgba(255, 255, 255, 0.95); padding: 4rem 2rem; border-radius: 20px; max-width: 800px; margin: 0 auto; box-shadow: 0 30px 60px rgba(0,0,0,0.2);">
+                <h3 style="font-size: 2rem; color: #667eea; margin-bottom: 1rem;">India's Most Trusted Emotional Platform</h3>
+                <p style="font-size: 1.3rem; opacity: 0.9;">Connecting hearts • Reducing loneliness • Building emotional resilience</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <h3>Heart To Heart 💙</h3>
+            <p>Be Heard Without Judgment | India Startup Vision 2026</p>
+            <p>&copy; 2024 Heart To Heart. All rights reserved.</p>
+            <div style="margin-top: 2rem;">
+                <a href="#" style="color: white; margin: 0 1rem; text-decoration: none;">WhatsApp</a>
+                <a href="#" style="color: white; margin: 0 1rem; text-decoration: none;">Contact</a>
+                <a href="#" style="color: white; margin: 0 1rem; text-decoration: none;">Privacy</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        //
