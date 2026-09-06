@@ -191,6 +191,59 @@ body.flow-complete main > section{
 }
 </style>
 
+
+<style id="menu-and-feedback-final">
+@media (max-width: 850px){
+  header{position:sticky!important;top:0!important;z-index:9999!important}
+  #menuBtn{display:block!important;position:relative!important;z-index:10003!important;cursor:pointer!important}
+  #nav{
+    display:flex!important;
+    flex-direction:column!important;
+    position:fixed!important;
+    top:0!important;
+    right:0!important;
+    width:min(88vw,360px)!important;
+    height:100vh!important;
+    padding:78px 22px 24px!important;
+    margin:0!important;
+    gap:8px!important;
+    background:#fff!important;
+    box-shadow:-10px 0 30px rgba(0,0,0,.16)!important;
+    transform:translateX(105%)!important;
+    visibility:hidden!important;
+    opacity:0!important;
+    transition:transform .25s ease,opacity .25s ease,visibility .25s ease!important;
+    z-index:10002!important;
+    overflow-y:auto!important;
+  }
+  #nav.show{
+    transform:translateX(0)!important;
+    visibility:visible!important;
+    opacity:1!important;
+  }
+  #nav .menu-close{
+    display:block!important;
+    position:absolute!important;
+    top:18px!important;
+    right:18px!important;
+    z-index:10004!important;
+  }
+  #nav a{
+    display:block!important;
+    width:100%!important;
+    padding:14px 16px!important;
+    background:#faf7f5!important;
+    border-radius:12px!important;
+  }
+  #nav .locked-nav{display:contents!important}
+  #menuBackdrop{display:block!important;position:fixed!important;inset:0!important;z-index:10001!important;background:rgba(20,15,20,.35)!important;opacity:0!important;pointer-events:none!important}
+  body.menu-open #menuBackdrop{opacity:1!important;pointer-events:auto!important}
+  body.menu-open{overflow:hidden!important}
+}
+.ht-icons .card{text-align:center}
+.ht-icon{font-size:38px;font-weight:800;margin-bottom:8px}
+.ht-feedback-card{max-width:820px;margin:auto}
+</style>
 </head>
 <body>
 
@@ -200,7 +253,7 @@ body.flow-complete main > section{
 <div class="menu-backdrop" id="menuBackdrop" onclick="closeMenu()"></div>
 <nav id="nav">
 <button class="menu-close" aria-label="Close menu" onclick="closeMenu()">×</button>
-<a href="#book" id="navBook">Book</a><span class="locked-nav" id="lockedNav"><a href="#how">How it works</a><a href="#pricing">Pricing</a><a href="#safety">Safety</a><a href="#policies">Policies</a></span>
+<a href="#book" id="navBook">Book</a><span class="locked-nav" id="lockedNav"><a href="#how">How it works</a><a href="#pricing">Pricing</a><a href="#safety">Safety</a><a href="#policies">Policies</a><a href="#three-icons">Why Heart to Heart</a><a href="#feedback">Feedback</a></span>
 </nav>
 </header>
 
@@ -209,7 +262,7 @@ body.flow-complete main > section{
 <span class="eyebrow">YOUR CONVERSATION MATTERS</span>
 <h1>Sometimes, you just need someone who listens.</h1>
 <p class="lead">A warm, respectful space to express what you're feeling — without shame, pressure or unnecessary judgement.</p>
-<div class="actions"><a class="btn primary" href="#book">Book a Session</a><a class="btn ghost" href="#how">How It Works</a></div>
+<div class="actions"><a class="btn primary" href="#book" onclick="startBooking(event)">Book a Session</a><a class="btn ghost" href="#book" onclick="startBooking(event)">Start Booking</a></div>
 <p class="tiny">Heart to Heart is a listening and emotional-expression service. It is not therapy, counselling, diagnosis, psychiatric care or medical treatment.</p>
 </div>
 <div class="hero-card">
@@ -236,6 +289,20 @@ body.flow-complete main > section{
 <div class="price-card"><span class="pill">ONLINE</span><h3>Online Listening Session</h3><div class="price">₹300 <small>/ 60 min</small></div><ul><li>Google Meet or Zoom</li><li>Additional time: ₹300/hour</li><li>Booking required</li></ul><a class="btn primary full" href="#book" onclick="setType('online')">Book Online</a></div>
 <div class="price-card featured"><span class="pill">MUMBAI</span><h3>Offline Listening Session</h3><div class="price">₹500 <small>/ 60 min</small></div><ul><li>Café / co-working / suitable public place</li><li>Travel charge based on distance</li><li>Additional time: ₹300/hour</li></ul><a class="btn primary full" href="#book" onclick="setType('offline')">Book Offline</a></div>
 </div><p class="center tiny">Travel charges are shared before confirmation. No surprise charges.</p>
+</section>
+
+
+<section class="section soft" id="three-icons">
+<div class="section-head">
+<span class="eyebrow">A SIMPLE, HUMAN EXPERIENCE</span>
+<h2>Three things you can expect</h2>
+<p class="lead">A calm and straightforward space designed around listening, respect and privacy.</p>
+</div>
+<div class="three ht-icons">
+  <div class="card"><div class="ht-icon">♡</div><h3>Someone Who Listens</h3><p>No judgement. Take your time and speak freely.</p></div>
+  <div class="card"><div class="ht-icon">◷</div><h3>Your Time, Your Pace</h3><p>Choose a session time that works for you.</p></div>
+  <div class="card"><div class="ht-icon">✓</div><h3>Respect &amp; Privacy</h3><p>Your conversation is handled with care and clear boundaries.</p></div>
+</div>
 </section>
 
 <section class="section" id="book">
@@ -302,18 +369,25 @@ body.flow-complete main > section{
 
 <script>
 function toggleMenu(){
- const nav=document.getElementById('nav'), btn=document.getElementById('menuBtn');
+ const nav=document.getElementById('nav');
+ const btn=document.getElementById('menuBtn');
  const open=!nav.classList.contains('show');
- nav.classList.toggle('show',open);
- document.body.classList.toggle('menu-open',open);
- btn.setAttribute('aria-expanded',open?'true':'false');
- btn.setAttribute('aria-label',open?'Close menu':'Open menu');
- btn.textContent=open?'×':'☰';
+ if(open){
+   nav.classList.add('show');
+   document.body.classList.add('menu-open');
+   btn.setAttribute('aria-expanded','true');
+   btn.setAttribute('aria-label','Close menu');
+   btn.textContent='×';
+ }else{ closeMenu(); }
 }
 function closeMenu(){
- const nav=document.getElementById('nav'), btn=document.getElementById('menuBtn');
- nav.classList.remove('show'); document.body.classList.remove('menu-open');
- btn.setAttribute('aria-expanded','false'); btn.setAttribute('aria-label','Open menu'); btn.textContent='☰';
+ const nav=document.getElementById('nav');
+ const btn=document.getElementById('menuBtn');
+ nav.classList.remove('show');
+ document.body.classList.remove('menu-open');
+ btn.setAttribute('aria-expanded','false');
+ btn.setAttribute('aria-label','Open menu');
+ btn.textContent='☰';
 }
 document.querySelectorAll('#nav a').forEach(a=>a.addEventListener('click',closeMenu));
 
@@ -376,6 +450,52 @@ document.addEventListener('DOMContentLoaded', function(){
     targets.forEach(el=>io.observe(el));
   } else { targets.forEach(el=>el.classList.add('visible')); }
 });
+
+const feedbackForm=document.getElementById('feedbackForm');
+if(feedbackForm){
+ feedbackForm.addEventListener('submit',function(e){
+   e.preventDefault();
+   const data={
+     rating:document.getElementById('feedbackRating').value,
+     name:document.getElementById('feedbackName').value,
+     text:document.getElementById('feedbackText').value,
+     submittedAt:new Date().toISOString()
+   };
+   const old=JSON.parse(localStorage.getItem('heartToHeartFeedback')||'[]');
+   old.push(data);
+   localStorage.setItem('heartToHeartFeedback',JSON.stringify(old));
+   document.getElementById('feedbackThanks').style.display='block';
+   feedbackForm.reset();
+ });
+}
+
 </script>
+
+<section class="section" id="feedback">
+<div class="section-head">
+<span class="eyebrow">YOUR FEEDBACK MATTERS</span>
+<h2>How was your experience?</h2>
+<p class="lead">A quick feedback note helps us make Heart to Heart better.</p>
+</div>
+<div class="form-card ht-feedback-card">
+<form id="feedbackForm">
+  <div class="form"><label>Rating
+    <select id="feedbackRating" required>
+      <option value="">Choose a rating</option>
+      <option>5 — Excellent</option><option>4 — Very good</option>
+      <option>3 — Good</option><option>2 — Needs improvement</option><option>1 — Poor</option>
+    </select>
+  </label>
+  <label>Your name (optional)<input id="feedbackName" type="text" placeholder="Your name"></label>
+  <label class="full">Your feedback
+    <textarea id="feedbackText" rows="5" placeholder="Tell us about your experience..." required></textarea>
+  </label>
+  </div>
+  <button class="btn primary" type="submit">Send Feedback</button>
+  <p id="feedbackThanks" class="tiny" style="display:none;margin-top:12px;">Thank you ❤️ Your feedback has been recorded on this device.</p>
+</form>
+</div>
+</section>
+
 </body>
 </html>
